@@ -17,6 +17,9 @@ header {
   color: white;
   padding: 20px;
 }
+nav {
+  margin-top: 20px;
+}
 
 nav a {
   margin: 10px;

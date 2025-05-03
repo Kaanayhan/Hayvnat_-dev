@@ -79,40 +79,44 @@
     </div>
   
     <script>
+      document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.card');
         const popup = document.getElementById('popup');
         const popupImg = document.getElementById('popup-img');
         const popupName = document.getElementById('popup-name');
         const popupDescription = document.getElementById('popup-description');
-      
+    
         const animalData = {
-          'Aslan': 'Aslanlar, Afrika savanlarında yaşayan güçlü ve sosyal kedi türleridir. Krallar olarak bilinirler.',
-          'Zebra': 'Zebralar, Afrika\'nın otlaklarında yaşayan ve siyah-beyaz çizgileriyle tanınan eşekgillerdir.',
-          'Kaplan': 'Kaplanlar, büyük kedi türlerinden olup, ormanlarda ve bataklıklarda yaşar. Çok güçlüdürler.',
-          'Fil': 'Filler, dünyanın en büyük kara hayvanlarıdır. Uzun burunları ve büyük kulakları vardır.',
-          'Ayı': 'Ayılar, kuzey yarımkürenin ormanlarında yaşayan etçil ve otçul hayvanlardır.',
-          'Goril': 'Goriller, şempanzelerle yakın akraba olup, ormanlarda sakin bir yaşam sürerler.',
-          'Tembel Hayvan': 'Tembel hayvanlar, tropikal ormanlarda yaşar ve ağaçlardan inmeyen çok yavaş hareket eden hayvanlardır.',
-          'Kanguru': 'Kangurular, Avustralya\'da yaşayan büyük, zıplayarak hareket eden hayvanlardır.',
-          'Tavus Kuşu': 'Tavus kuşları, muazzam kuyruklarıyla tanınır ve güney Asya\'da yaşar.',
-          'Kaplumbağa': 'Kaplumbağalar, genellikle su kenarlarında yaşayan, sert kabuklu hayvanlardır.',
-          'İguana': 'İguanalar, tropikal iklimlerde yaşayan büyük yeşil sürüngenlerdir.',
-          'Panda': 'Pandalılar, Çin\'in bambu ormanlarında yaşayan nadir ve sevilen bir türdür.'
+          'Aslan': 'Aslanlar, Afrika savanlarında yaşayan güçlü ve sosyal kedi türleridir.',
+          'Zebra': 'Zebralar, Afrika\'nın otlaklarında yaşayan ve çizgileriyle tanınan eşekgillerdir.',
+          'Kaplan': 'Kaplanlar, ormanlarda ve bataklıklarda yaşar. Çok güçlü avcılardır.',
+          'Fil': 'Filler, dünyanın en büyük kara hayvanlarıdır. Uzun burunları vardır.',
+          'Ayı': 'Ayılar, kuzey yarımkürenin ormanlarında yaşayan iri memelilerdir.',
+          'Goril': 'Goriller, sakin ve güçlü primatlardır. Ormanlarda yaşarlar.',
+          'Tembel Hayvan': 'Ağaçlarda yaşayan ve yavaş hareket eden sakin canlılardır.',
+          'Kanguru': 'Kangurular, Avustralya\'ya özgü, zıplayarak hareket eden keseli hayvanlardır.',
+          'Tavus Kuşu': 'Görkemli kuyruklarıyla bilinir, Güney Asya\'da yaşarlar.',
+          'Kaplumbağa': 'Sert kabuklarıyla bilinen, karada ve suda yaşayan canlılardır.',
+          'İguana': 'Tropik iklimlerde yaşayan, sakin sürüngenlerdir.',
+          'Panda': 'Bambu yiyerek yaşayan, Çin\'in sembol hayvanlarından biridir.'
         };
-      
+    
         cards.forEach(card => {
           card.addEventListener('click', () => {
-            const animalName = card.querySelector('p').textContent;
-            popup.style.display = 'flex';
+            const name = card.querySelector('p').textContent;
             popupImg.src = card.querySelector('img').src;
-            popupName.textContent = animalName;
-            popupDescription.textContent = animalData[animalName];
+            popupName.textContent = name;
+            popupDescription.textContent = animalData[name];
+            popup.style.display = 'flex';
           });
         });
-      
-        popup.addEventListener('click', () => {
-          popup.style.display = 'none';
+    
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) {
+            popup.style.display = 'none';
+          }
         });
-      </script>
+      });
+    </script>
   </body>
 </html>
