@@ -1,122 +1,96 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaanZoo</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="pictures/voli-78d00c52.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaanZoo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="pictures/voli-78d00c52.png" />
 </head>
 <body>
-    <header>
-      <h1>KaanZoo Hayvanat Bahçesi - Hayvanlar</h1>
-    </header>
-  
-    <nav>
-      <a href="index.html">Anasayfa</a>
-      <a href="animals.html">Hayvanlar</a>
-      <a href="communication.html">İletişim</a>
-    </nav>
-  
-    <section>
-      <div class="animal-grid">
-        <div class="card">
-          <img src="pictures/aslan.png" alt="Aslan" class="animal-img">
-          <p>Aslan</p>
-        </div>
-        <div class="card">
-          <img src="pictures/zebra.png" alt="Zebra" class="animal-img">
-          <p>Zebra</p>
-        </div>
-        <div class="card">
-          <img src="pictures/kaplan.png" alt="Kaplan" class="animal-img">
-          <p>Kaplan</p>
-        </div>
-        <div class="card">
-          <img src="pictures/fil.png" alt="Fil" class="animal-img">
-          <p>Fil</p>
-        </div>
-        <div class="card">
-          <img src="pictures/ayı.png" alt="Ayı" class="animal-img">
-          <p>Ayı</p>
-        </div>
-        <div class="card">
-          <img src="pictures/goril.png" alt="Goril" class="animal-img">
-          <p>Goril</p>
-        </div>
-        <div class="card">
-          <img src="pictures/tembel_hayvan.png" alt="Tembel Hayvan" class="animal-img">
-          <p>Tembel Hayvan</p>
-        </div>
-        <div class="card">
-          <img src="pictures/kanguru.png" alt="Kanguru" class="animal-img">
-          <p>Kanguru</p>
-        </div>
-        <div class="card">
-          <img src="pictures/tavus_kuşu.png" alt="Tavus Kuşu" class="animal-img">
-          <p>Tavus Kuşu</p>
-        </div>
-        <div class="card">
-          <img src="pictures/kaplumbağa.png" alt="Kaplumbağa" class="animal-img">
-          <p>Kaplumbağa</p>
-        </div>
-        <div class="card">
-          <img src="pictures/iguana.png" alt="İguana" class="animal-img">
-          <p>İguana</p>
-        </div>
-        <div class="card">
-          <img src="pictures/panda.png" alt="Panda" class="animal-img">
-          <p>Panda</p>
-        </div>
-      </div>
-    </section>
-  
-    <div class="popup" id="popup">
-      <div class="popup-content">
-        <img src="" id="popup-img" alt="">
-        <p id="popup-name"></p>
-        <p id="popup-description"></p>
-      </div>
+  <header>
+    <h1>KaanZoo Hayvanat Bahçesi - Hayvanlar</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Anasayfa</a>
+    <a href="animals.html">Hayvanlar</a>
+    <a href="communication.html">İletişim</a>
+  </nav>
+
+  <section>
+    <div class="animal-grid">
+      <div class="card"><img src="pictures/aslan.png" alt="Aslan" class="animal-img"><p>Aslan</p></div>
+      <div class="card"><img src="pictures/zebra.png" alt="Zebra" class="animal-img"><p>Zebra</p></div>
+      <div class="card"><img src="pictures/kaplan.png" alt="Kaplan" class="animal-img"><p>Kaplan</p></div>
+      <div class="card"><img src="pictures/fil.png" alt="Fil" class="animal-img"><p>Fil</p></div>
+      <div class="card"><img src="pictures/ayı.png" alt="Ayı" class="animal-img"><p>Ayı</p></div>
+      <div class="card"><img src="pictures/goril.png" alt="Goril" class="animal-img"><p>Goril</p></div>
+      <div class="card"><img src="pictures/tembel_hayvan.png" alt="Tembel Hayvan" class="animal-img"><p>Tembel Hayvan</p></div>
+      <div class="card"><img src="pictures/kanguru.png" alt="Kanguru" class="animal-img"><p>Kanguru</p></div>
+      <div class="card"><img src="pictures/tavus_kuşu.png" alt="Tavus Kuşu" class="animal-img"><p>Tavus Kuşu</p></div>
+      <div class="card"><img src="pictures/kaplumbağa.png" alt="Kaplumbağa" class="animal-img"><p>Kaplumbağa</p></div>
+      <div class="card"><img src="pictures/iguana.png" alt="İguana" class="animal-img"><p>İguana</p></div>
+      <div class="card"><img src="pictures/panda.png" alt="Panda" class="animal-img"><p>Panda</p></div>
     </div>
-  
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.card');
-        const popup = document.getElementById('popup');
-        const popupImg = document.getElementById('popup-img');
-        const popupName = document.getElementById('popup-name');
-        const popupDescription = document.getElementById('popup-description');
-    
-        const animalData = {
-          'Aslan': 'Aslanlar, Afrika savanlarında yaşayan güçlü ve sosyal kedi türleridir.',
-          'Zebra': 'Zebralar, Afrika\'nın otlaklarında yaşayan ve çizgileriyle tanınan eşekgillerdir.',
-          'Kaplan': 'Kaplanlar, ormanlarda ve bataklıklarda yaşar. Çok güçlü avcılardır.',
-          'Fil': 'Filler, dünyanın en büyük kara hayvanlarıdır. Uzun burunları vardır.',
-          'Ayı': 'Ayılar, kuzey yarımkürenin ormanlarında yaşayan iri memelilerdir.',
-          'Goril': 'Goriller, sakin ve güçlü primatlardır. Ormanlarda yaşarlar.',
-          'Tembel Hayvan': 'Ağaçlarda yaşayan ve yavaş hareket eden sakin canlılardır.',
-          'Kanguru': 'Kangurular, Avustralya\'ya özgü, zıplayarak hareket eden keseli hayvanlardır.',
-          'Tavus Kuşu': 'Görkemli kuyruklarıyla bilinir, Güney Asya\'da yaşarlar.',
-          'Kaplumbağa': 'Sert kabuklarıyla bilinen, karada ve suda yaşayan canlılardır.',
-          'İguana': 'Tropik iklimlerde yaşayan, sakin sürüngenlerdir.',
-          'Panda': 'Bambu yiyerek yaşayan, Çin\'in sembol hayvanlarından biridir.'
-        };
-    
-        cards.forEach(card => {
-          card.addEventListener('click', () => {
-            const name = card.querySelector('p').textContent;
-            popupImg.src = card.querySelector('img').src;
-            popupName.textContent = name;
-            popupDescription.textContent = animalData[name];
-            popup.style.display = 'flex';
-          });
-        });
-    
-        popup.addEventListener('click', (e) => {
-          if (e.target === popup) {
-            popup.style.display = 'none';
-          }
+  </section>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closePopup()">&times;</button>
+      <img src="" id="popup-img" alt="">
+      <p id="popup-name"></p>
+      <p id="popup-description"></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card');
+      const popup = document.getElementById('popup');
+      const popupImg = document.getElementById('popup-img');
+      const popupName = document.getElementById('popup-name');
+      const popupDescription = document.getElementById('popup-description');
+
+      const animalData = {
+        'Aslan': 'Aslanlar, Afrika savanlarında yaşayan güçlü ve sosyal kedi türleridir.',
+        'Zebra': 'Zebralar, Afrika\'nın otlaklarında yaşayan ve çizgileriyle tanınan eşekgillerdir.',
+        'Kaplan': 'Kaplanlar, ormanlarda ve bataklıklarda yaşar. Çok güçlü avcılardır.',
+        'Fil': 'Filler, dünyanın en büyük kara hayvanlarıdır. Uzun burunları vardır.',
+        'Ayı': 'Ayılar, kuzey yarımkürenin ormanlarında yaşayan iri memelilerdir.',
+        'Goril': 'Goriller, sakin ve güçlü primatlardır. Ormanlarda yaşarlar.',
+        'Tembel Hayvan': 'Ağaçlarda yaşayan ve yavaş hareket eden sakin canlılardır.',
+        'Kanguru': 'Kangurular, Avustralya\'ya özgü, zıplayarak hareket eden keseli hayvanlardır.',
+        'Tavus Kuşu': 'Görkemli kuyruklarıyla bilinir, Güney Asya\'da yaşarlar.',
+        'Kaplumbağa': 'Sert kabuklarıyla bilinen, karada ve suda yaşayan canlılardır.',
+        'İguana': 'Tropik iklimlerde yaşayan, sakin sürüngenlerdir.',
+        'Panda': 'Bambu yiyerek yaşayan, Çin\'in sembol hayvanlarından biridir.'
+      };
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const name = card.querySelector('p').textContent;
+          popupImg.src = card.querySelector('img').src;
+          popupName.textContent = name;
+          popupDescription.textContent = animalData[name];
+          popup.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
         });
       });
-    </script>
-  </body>
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closePopup();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+      });
+    });
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  </script>
+</body>
 </html>
