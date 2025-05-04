@@ -141,10 +141,12 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
 }
-.animal-grid-body{
+
+.animal-grid-body {
   margin-bottom: 4%;
   margin-top: 4%;
 }
+
 .card {
   background: #fff;
   border-radius: 15px;
@@ -245,6 +247,71 @@ h2 {
   color: #e74c3c;
 }
 
+.mesaj {
+  background-color: #f9f9f9;
+  padding: 12px;  /* Küçültüldü */
+  margin-bottom: 8px;  /* Küçültüldü */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mesaj p {
+  margin: 5px 0;
+}
+
+.mesaj strong {
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+form input, form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+  border-color: #2c3e50;
+  outline: none;
+}
+
+form textarea {
+  resize: none;  /* Textarea boyutlandırma özelliği kapatıldı */
+}
+
+form button {
+  padding: 12px;
+  background-color: #2c3e50;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #1a5276;
+}
+
 @keyframes popupFade {
   from {
     opacity: 0;
@@ -259,6 +326,10 @@ h2 {
 @media (max-width: 1024px) {
   .animal-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  form {
+    padding: 15px;
   }
 }
 
@@ -283,5 +354,9 @@ h2 {
 
   .popup-content {
     padding: 25px;
+  }
+
+  form {
+    padding: 10px;
   }
 }
