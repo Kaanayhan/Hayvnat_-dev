@@ -4,32 +4,367 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KaanZoo</title>
-  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="pictures/voli-78d00c52.png" />
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4lr3YTml0Pu-wnCzBSvTuD2s5DAiti8c",
+      authDomain: "hayvanat-dev.firebaseapp.com",
+      projectId: "hayvanat-dev",
+      storageBucket: "hayvanat-dev.firebasestorage.app",
+      messagingSenderId: "383729118826",
+      appId: "1:383729118826:web:6148b375a4fdac3887e413",
+      measurementId: "G-3Y6Z6KDBH2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 </head>
+
 <body>
   <header>
-    <h1>KaanZoo Hayvanat Bahçesi - Ana Sayfa</h1>
+    <h1>KaanZoo Hayvanat Bahçesi</h1>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round">
+          <div class="mode-icon moon">🌙</div>
+          <div class="mode-icon sun">☀️</div>
+        </div>
+      </label>
+    </div>
   </header>
 
   <nav>
     <a href="index.html">Anasayfa</a>
     <a href="animals.html">Hayvanlar</a>
-    <a href="comment.html">Yorum</a>
     <a href="your_comments.html">Yorumlarınız</a>
   </nav>
 
-  <section class="about">
-    <h2>Biz Kimiz?</h2>
-    <div class="about-container">
-      <div class="about-text">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum at rerum, mollitia blanditiis ex exercitationem voluptate natus totam possimus.</p>
+  <main>
+    <section class="about">
+      <h2>Biz Kimiz?</h2>
+      <div class="about-container">
+        <div class="about-text">
+          <p>KaanZoo, 2020 yılında kurulmuş, doğal yaşam alanlarına en yakın şekilde tasarlanmış, modern bir hayvanat bahçesidir. Amacımız, ziyaretçilerimize hayvanları doğal ortamlarında gözlemleme imkanı sunarak, doğaya ve hayvanlara olan sevgiyi artırmaktır.</p>
+          <p>Tesisimizde 250'den fazla tür ve 2000'den fazla hayvan barındırıyoruz. Her hayvan için özenle tasarlanmış yaşam alanlarımız, hayvanların doğal davranışlarını sergilemelerine olanak tanır.</p>
+          <p>KaanZoo olarak sadece bir hayvanat bahçesi değil, aynı zamanda bir eğitim ve koruma merkeziyiz. Nesli tükenmekte olan türlerin korunması için uluslararası programlara katılıyor ve bilimsel araştırmalara destek oluyoruz.</p>
+        </div>
+        <div class="about-image">
+          <img src="pictures/aslan.png" alt="Aslan">
+        </div>
       </div>
-      <div class="about-image">
-        <img src="pictures/aslan.png" alt="Aslan">
+    </section>
+
+    <section class="features-section">
+      <h2>Neden Bizi Ziyaret Etmelisiniz?</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🦁</div>
+          <h3>250+ Tür</h3>
+          <p>Dünyanın her yerinden 250'den fazla türü doğal yaşam alanlarında görebilirsiniz.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌱</div>
+          <h3>Eğitim Programları</h3>
+          <p>Her yaş grubu için özel hazırlanmış eğitim programlarımızla doğayı keşfedin.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="animals-preview">
+      <h2>Popüler Hayvanlarımız</h2>
+      <div class="animal-grid">
+        <div class="card">
+          <div class="card-img-container">
+            <img class="animal-img" src="pictures/aslan.png" alt="Aslan">
+          </div>
+          <div class="card-content">
+            <h3>Aslan</h3>
+            <p>Afrika'nın en güçlü yırtıcılarından olan aslanlar, KaanZoo'nun en popüler sakinlerindendir.</p>
+            <a href="animals.html" class="learn-more">Daha Fazla</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-container">
+            <img class="animal-img" src="pictures/fil.png" alt="Fil">
+          </div>
+          <div class="card-content">
+            <h3>Fil</h3>
+            <p>Zekalarıyla bilinen filler, büyük aileleriyle birlikte geniş habitatlarında yaşarlar.</p>
+            <a href="animals.html" class="learn-more">Daha Fazla</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-container">
+            <img class="animal-img" src="pictures/ayı.png" alt="Zürafa">
+          </div>
+          <div class="card-content">
+            <h3>Ayı</h3>
+            <p>Ayılar, kuzey yarımkürenin ormanlarında yaşayan iri memelilerdir.</p>
+            <a href="animals.html" class="learn-more">Daha Fazla</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-container">
+            <img class="animal-img" src="pictures/goril.png" alt="Penguen">
+          </div>
+          <div class="card-content">
+            <h3>Goril</h3>
+            <p>Goriller, sakin ve güçlü primatlardır. Ormanlarda yaşarlar.</p>
+            <a href="animals.html" class="learn-more">Daha Fazla</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-preview">
+      <h2>Görüşleriniz Bizim İçin Önemli</h2>
+        <form id="iletisimForm">
+          <label for="ad">Adınız:</label><br />
+          <input type="text" id="ad" name="ad" required><br /><br />
+  
+          <label for="email">E-posta:</label><br />
+          <input type="email" id="email" name="email" required><br /><br />
+  
+          <label for="mesaj">Mesajınız:</label><br />
+          <textarea id="mesaj" name="mesaj" rows="5" required></textarea><br /><br />
+  
+          <button type="submit">Gönder</button>
+        </form>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('iletisimForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const ad = document.getElementById('ad').value;
+      const email = document.getElementById('email').value;
+      const mesaj = document.getElementById('mesaj').value;
+
+      console.log("Form gönderiliyor:", { ad, email, mesaj });
+
+      db.collection("iletisimMesajlari").add({
+        ad: ad,
+        email: email,
+        mesaj: mesaj,
+        tarih: new Date()
+      })
+      .then(() => {
+        alert("Mesajın başarıyla gönderildi!");
+        console.log("✅ Firestore'a yazıldı!");
+        document.getElementById('iletisimForm').reset();
+      })
+      .catch((error) => {
+        alert("❌ Hata oluştu: " + error.message);
+        console.error("Firestore error:", error);
+      });
+    });
+  const toggleSwitch = document.querySelector('#checkbox');
+  const currentTheme = localStorage.getItem('theme');
+
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
+    }
+  }
+
+  function switchTheme(e) {
+    if (e.target.checked) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }    
+  }
+
+  toggleSwitch.addEventListener('change', switchTheme, false);
+  </script>
+  <style>
+    :root {
+    --primary-color: #2e7d32;
+    --secondary-color: #1b5e20;
+    --accent-color: #ffca28;
+    --text-color: #263238;
+    --light-text: #f5f5f5;
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+    --header-gradient: linear-gradient(135deg, #2e7d32, #1b5e20);
+    --form-bg: #f9f9f9;
+    --input-border: #e0e0e0;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --border-color: #eee;
+  }
+
+  [data-theme="dark"] {
+    --primary-color: #4caf50;
+    --secondary-color: #388e3c;
+    --accent-color: #ffd54f;
+    --text-color: #e0e0e0;
+    --light-text: #f5f5f5;
+    --background: #121212;
+    --card-bg: #1e1e1e;
+    --header-gradient: linear-gradient(135deg, #1b5e20, #0d3311);
+    --form-bg: #2a2a2a;
+    --input-border: #3a3a3a;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    --border-color: #333;
+  }
+
+  .theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    z-index: 100;
+  }
+
+  .theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+  }
+
+  .theme-switch input {
+    display: none;
+  }
+
+  .slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+  }
+
+  .slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+    z-index: 2;
+  }
+
+  input:checked + .slider {
+    background-color: #2c3e50;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .mode-icon {
+    z-index: 1;
+    font-size: 16px;
+  }
+
+  .moon {
+    margin-right: 10px;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  header {
+    background: var(--header-gradient);
+  }
+
+  .card, .feature-card, .about-container, form, .comment {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
+  }
+
+  form input, form textarea {
+    resize: none;
+    background-color: var(--form-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text-color);
+  }
+
+  .comment-header {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .card h3, .feature-card h3, section h2, .comment-author {
+    color: var(--primary-color);
+  }
+
+  .card p, .feature-card p, .about-text p, #popup-description {
+    color: var(--text-color);
+  }
+
+  .learn-more {
+    background-color: var(--primary-color);
+  }
+
+  .learn-more:hover {
+    background-color: var(--secondary-color);
+  }
+
+  nav a {
+    color: var(--primary-color);
+  }
+
+  nav a:hover {
+    background-color: rgba(46, 125, 50, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .theme-switch-wrapper {
+      top: 15px;
+      right: 15px;
+    }
+    
+    .theme-switch {
+      height: 28px;
+      width: 52px;
+    }
+    
+    .slider:before {
+      height: 20px;
+      width: 20px;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+    
+    .mode-icon {
+      font-size: 14px;
+    }
+  }
+  </style>
 </body>
 </html>
-
