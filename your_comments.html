@@ -24,7 +24,6 @@
   </script>
   <style>
     :root {
-      /* Light Mode (Varsayılan) */
       --primary-color: #2e7d32;
       --secondary-color: #1b5e20;
       --accent-color: #ffca28;
@@ -42,7 +41,6 @@
     }
 
     [data-theme="dark"] {
-      /* Dark Mode */
       --primary-color: #4caf50;
       --secondary-color: #388e3c;
       --accent-color: #ffd54f;
@@ -192,7 +190,6 @@
       border-radius: 2px;
     }
 
-    /* Mesajlar için Stil */
     #mesajlarListesi {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -302,7 +299,6 @@
       color: #888;
     }
 
-    /* Tema Değiştirme Butonu */
     .theme-switch-wrapper {
       display: flex;
       align-items: center;
@@ -376,7 +372,6 @@
     }
 
 
-    /* Sayaç */
     .comments-counter {
       background-color: var(--card-bg);
       border-radius: 10px;
@@ -402,7 +397,6 @@
       border-radius: 20px;
     }
 
-    /* Loading animasyonu */
     .loading {
       display: flex;
       justify-content: center;
@@ -424,7 +418,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Responsive Tasarım */
     @media (max-width: 768px) {
       #mesajlarListesi {
         grid-template-columns: 1fr;
@@ -501,11 +494,9 @@
   </main>
 
   <script>
-    // Dark/Light Mode geçiş fonksiyonu
     const toggleSwitch = document.querySelector('#checkbox');
     const currentTheme = localStorage.getItem('theme');
 
-    // Sayfa yüklendiğinde kaydedilmiş tema varsa uygula
     if (currentTheme) {
       document.documentElement.setAttribute('data-theme', currentTheme);
       
@@ -514,7 +505,6 @@
       }
     }
 
-    // Tema değişim fonksiyonu
     function switchTheme(e) {
       if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
@@ -525,20 +515,16 @@
       }    
     }
 
-    // Tema değişikliğini dinle
     toggleSwitch.addEventListener('change', switchTheme, false);
 
-    // Firebase'den mesajları yükle
     const loadingElement = document.getElementById('loading');
     const mesajlarListesi = document.getElementById('mesajlarListesi');
     const messageCountElement = document.getElementById('message-count');
 
     db.collection("iletisimMesajlari").orderBy("tarih", "desc").get()
       .then((querySnapshot) => {
-        // Loading animasyonunu gizle
         loadingElement.style.display = 'none';
         
-        // Mesajları görüntüle
         if (querySnapshot.size === 0) {
           mesajlarListesi.innerHTML = `
             <div class="no-messages">
