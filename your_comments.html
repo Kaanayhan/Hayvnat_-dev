@@ -1,28 +1,117 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mesajlar - KaanZoo</title>
-  <link rel="icon" href="pictures/voli-78d00c52.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yorumlarınız - KaanZoo</title>
+  <link rel="icon" href="pictures/voli-78d00c52.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>KaanZoo Yorumlarınız</h1>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox">
+        <div class="slider round">
+          <div class="mode-icon moon">🌙</div>
+          <div class="mode-icon sun">☀️</div>
+        </div>
+      </label>
+    </div>
+  </header>
 
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <nav>
+    <a href="index.html">Anasayfa</a>
+    <a href="animals.html">Hayvanlar</a>
+    <a href="your_comments.html">Yorumlarınız</a>
+  </nav>
+
+  <main>
+    <section class="messages-section">
+      <h2>Gönderilen Yorumlar</h2>
+      <div class="comments-counter">
+        <span class="counter-text">Toplam Yorum:</span>
+        <span class="counter-number" id="mesajSayisi">0</span>
+      </div>
+      <div id="mesajlarListesi">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyC4lr3YTml0Pu-wnCzBSvTuD2s5DAiti8c",
-      authDomain: "hayvanat-dev.firebaseapp.com",
-      projectId: "hayvanat-dev",
-      storageBucket: "hayvanat-dev.firebasestorage.app",
-      messagingSenderId: "383729118826",
-      appId: "1:383729118826:web:6148b375a4fdac3887e413",
-      measurementId: "G-3Y6Z6KDBH2"
-    };
+    const toggle = document.querySelector('#checkbox');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      toggle.checked = savedTheme === 'dark';
+    }
+    toggle.addEventListener('change', switchTheme);
+    function switchTheme(e) {
+      const theme = e.target.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    document.addEventListener('DOMContentLoaded', () => {
+      const msgs = JSON.parse(localStorage.getItem('messages') || '[]');
+      const listEl = document.getElementById('mesajlarListesi');
+      const countEl = document.getElementById('mesajSayisi');
+      countEl.textContent = msgs.length;
+      listEl.innerHTML = '';
+      if (msgs.length === 0) {
+        listEl.innerHTML = '<div class="no-messages"><p>Henüz yorum yok.</p></div>';
+      } else {
+        msgs.reverse().forEach(m => {
+          const card = document.createElement('div');
+          card.className = 'mesaj';
+
+          const header = document.createElement('div');
+          header.className = 'mesaj-header';
+          header.innerHTML = `
+            <span class="mesaj-name">${m.ad}</span>
+            <span class="mesaj-date"><span class="mesaj-date-icon">🕒</span>${m.tarih}</span>
+          `;
+
+          const content = document.createElement('p');
+          content.className = 'mesaj-content';
+          content.textContent = m.mesaj;
+
+          const email = document.createElement('div');
+          email.className = 'mesaj-email';
+          email.innerHTML = `<span class="mesaj-email-icon">✉️</span>${m.email}`;
+
+          const divider = document.createElement('div');
+          divider.className = 'mesaj-divider';
+
+          card.append(header, content, email, divider);
+          listEl.appendChild(card);
+        });
+      }
+    });
   </script>
+</body>
   <style>
+     .comments-counter { display: flex; align-items: center; margin-bottom: 25px; }
+  .counter-text { font-size: 1.1rem; margin-right: 10px; }
+  .counter-number { font-size: 1.2rem; font-weight: 700; }
+  #mesajlarListesi { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
+  .mesaj { background: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: var(--shadow); position: relative; }
+  .mesaj-header { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid var(--separator); padding-bottom: 8px; }
+  .mesaj-name { font-weight: 700; color: var(--primary-color); }
+  .mesaj-date { font-size: 0.85rem; color: #888; display: flex; align-items: center; }
+  .mesaj-date-icon { margin-right: 5px; }
+  .mesaj-content { margin: 12px 0; color: var(--text-color); line-height: 1.5; }
+  .mesaj-email { font-size: 0.9rem; color: #666; display: flex; align-items: center; }
+  .mesaj-email-icon { margin-right: 5px; }
+  .mesaj-divider { height: 1px; background: var(--separator); margin-top: 15px; }
+  .no-messages { grid-column: 1 / -1; text-align: center; padding: 50px; background: var(--card-bg); border-radius: 15px; box-shadow: var(--shadow); }
+  .loading { grid-column: 1 / -1; display: flex; justify-content: center; padding: 40px 0; }
+  .loading-spinner { width: 50px; height: 50px; border: 5px solid var(--separator); border-top: 5px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     :root {
       --primary-color: #2e7d32;
       --secondary-color: #1b5e20;
@@ -39,7 +128,35 @@
       --message-highlight: rgba(46, 125, 50, 0.08);
       --separator: #e0e0e0;
     }
-
+.comments-counter {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
+    }
+    .counter-text { font-size: 1.1rem; }
+    .counter-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+    }
+    #mesajlarListesi {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+      gap: 20px;
+    }
+    .mesaj-content { text-align: left; word-break: break-word; }
     [data-theme="dark"] {
       --primary-color: #4caf50;
       --secondary-color: #388e3c;
@@ -169,6 +286,7 @@
 
     section {
       margin-bottom: 50px;
+      width: 1250px;
     }
 
     h2 {
@@ -455,128 +573,4 @@
       }
     }
   </style>
-</head>
-<body>
-  <header>
-    <div class="theme-switch-wrapper">
-      <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round">
-          <div class="mode-icon moon">🌙</div>
-          <div class="mode-icon sun">☀️</div>
-        </div>
-      </label>
-    </div>
-    <h1>KaanZoo Hayvanat Bahçesi - Yorumlarınız</h1>
-  </header>
-
-  <nav>
-    <a href="index.html">Anasayfa</a>
-    <a href="animals.html">Hayvanlar</a>
-    <a href="your_comments.html">Yorumlarınız</a>
-  </nav>
-
-  <main style="width: 100% !important;">
-    <section>
-      <h2>Ziyaretçi Yorumları</h2>
-      
-      <div class="comments-counter">
-        <span class="counter-text">Toplam Yorum:</span>
-        <span class="counter-number" id="message-count">0</span>
-      </div>
-      
-      <div id="loading" class="loading">
-        <div class="loading-spinner"></div>
-      </div>
-      
-      <div id="mesajlarListesi"></div>
-    </section>
-  </main>
-
-  <script>
-    const toggleSwitch = document.querySelector('#checkbox');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
-    }
-
-    function switchTheme(e) {
-      if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      }    
-    }
-
-    toggleSwitch.addEventListener('change', switchTheme, false);
-
-    const loadingElement = document.getElementById('loading');
-    const mesajlarListesi = document.getElementById('mesajlarListesi');
-    const messageCountElement = document.getElementById('message-count');
-
-    db.collection("iletisimMesajlari").orderBy("tarih", "desc").get()
-      .then((querySnapshot) => {
-        loadingElement.style.display = 'none';
-        
-        if (querySnapshot.size === 0) {
-          mesajlarListesi.innerHTML = `
-            <div class="no-messages">
-              <p>Henüz hiç yorum bulunmamaktadır.</p>
-            </div>
-          `;
-          messageCountElement.textContent = '0';
-        } else {
-          messageCountElement.textContent = querySnapshot.size;
-          
-          querySnapshot.forEach((doc) => {
-            const mesaj = doc.data();
-            const tarih = new Date(mesaj.tarih.seconds * 1000);
-            const formattedDate = tarih.toLocaleDateString('tr-TR', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            });
-            const formattedTime = tarih.toLocaleTimeString('tr-TR', {
-              hour: '2-digit',
-              minute: '2-digit'
-            });
-            
-            const mesajElement = document.createElement('div');
-            mesajElement.classList.add('mesaj');
-            mesajElement.innerHTML = `
-              <div class="mesaj-header">
-                <span class="mesaj-name">${mesaj.ad || 'Misafir'}</span>
-                <span class="mesaj-date">
-                  <span class="mesaj-date-icon">📅</span>
-                  ${formattedDate}, ${formattedTime}
-                </span>
-              </div>
-              <div class="mesaj-content">${mesaj.mesaj}</div>
-              <div class="mesaj-email">
-                <span class="mesaj-email-icon">✉️</span>
-                ${mesaj.email}
-              </div>
-            `;
-            mesajlarListesi.appendChild(mesajElement);
-          });
-        }
-      })
-      .catch((error) => {
-        loadingElement.style.display = 'none';
-        mesajlarListesi.innerHTML = `
-          <div class="no-messages">
-            <p>Mesajlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>
-          </div>
-        `;
-        console.error("Mesajlar yüklenemedi:", error);
-      });
-  </script>
-</body>
 </html>
